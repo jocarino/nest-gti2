@@ -10,6 +10,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { ApiBody, ApiOperation } from '@nestjs/swagger';
 import { CreateSongDto } from './dto/create-song.dto';
 import { SongsService } from './songs.service';
 
@@ -18,12 +19,14 @@ export class SongsController {
   constructor(private songService: SongsService) {}
   @Get()
   @HttpCode(HttpStatus.OK)
-  async findAllSongs(createSongDto: CreateSongDto) {
+  @ApiOperation({ summary: 'Get all songs' })
+  async findAllSongs() {
     return await this.songService.findAll();
   }
 
   @Get(':id')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Get song with id' })
   async findSong(@Param('id') id: string) {
     const song = await this.songService.find(id);
 
@@ -36,6 +39,8 @@ export class SongsController {
 
   @Post()
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Create new song' })
+  @ApiBody({ type: CreateSongDto })
   async createSong(@Body() CreateSongDto: CreateSongDto) {
     const newSong = await this.songService.create(CreateSongDto);
     return `Song ${CreateSongDto.name} successfully created. \n ${newSong}`;
@@ -43,6 +48,8 @@ export class SongsController {
 
   @Put(':id')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Update song with id' })
+  @ApiBody({ type: CreateSongDto })
   async updateSong(
     @Param('id') id: string,
     @Body() createSongDto: CreateSongDto,
@@ -54,6 +61,7 @@ export class SongsController {
 
   @Delete(':id')
   @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Delete song with id' })
   async deleteSong(@Param('id') id: string) {
     const deletedSong = await this.songService.delete(id);
     return `Song ${deletedSong.name} successfully deleted.`;
