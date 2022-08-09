@@ -19,16 +19,12 @@ export class ArtistsService {
     return this.artistModel.find().exec();
   }
 
-  async find(id: string): Promise<Artist> {
+  async find(id: string) {
     return this.artistModel.findById(id).exec();
   }
 
   async update(id: string, createArtistDto: CreateArtistDto) {
-    const updatedArtist = this.artistModel.findByIdAndUpdate(
-      id,
-      createArtistDto,
-    );
-    return updatedArtist;
+    return await this.artistModel.findByIdAndUpdate(id, createArtistDto);
   }
 
   async delete(id: string) {

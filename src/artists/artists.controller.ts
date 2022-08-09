@@ -48,8 +48,9 @@ export class ArtistsController {
     @Param('id') id: string,
     @Body() createArtistDto: CreateArtistDto,
   ) {
-    const updatedArtist = await this.artistsService.update(id, createArtistDto);
-    return `Artist ${createArtistDto.name} successfully updated.`;
+    await this.artistsService.update(id, createArtistDto);
+    const updatedArtist = await this.artistsService.find(id);
+    return `Artist ${updatedArtist.name} successfully updated. \n ${updatedArtist}`;
   }
 
   @Delete(':id')
