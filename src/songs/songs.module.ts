@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Song, SongSchema } from 'src/schemas/song.schema';
+import { Song, SongSchema } from '../schemas/song.schema';
 import { SongsController } from './songs.controller';
 import { SongsService } from './songs.service';
 

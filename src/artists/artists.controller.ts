@@ -10,7 +10,6 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { NotFoundError } from 'rxjs';
 import { ArtistsService } from './artists.service';
 import { CreateArtistDto } from './dto/create-artist.dto';
 

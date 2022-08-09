@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { Artist, ArtistDocument } from 'src/schemas/artist.schema';
+import { Artist, ArtistDocument } from '../schemas/artist.schema';
 import { CreateArtistDto } from './dto/create-artist.dto';
 
 @Injectable()
@@ -19,15 +19,15 @@ export class ArtistsService {
     return this.artistModel.find().exec();
   }
 
-  async find(id: string) {
+  async find(id: string): Promise<Artist> {
     return this.artistModel.findById(id).exec();
   }
 
-  async update(id: string, createArtistDto: CreateArtistDto) {
+  async update(id: string, createArtistDto: CreateArtistDto): Promise<Artist> {
     return await this.artistModel.findByIdAndUpdate(id, createArtistDto);
   }
 
-  async delete(id: string) {
+  async delete(id: string): Promise<Artist> {
     return this.artistModel.findByIdAndDelete(id).exec();
   }
 }

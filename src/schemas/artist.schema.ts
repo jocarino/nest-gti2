@@ -16,7 +16,7 @@ export class Artist {
   profile: string;
 
   @Prop({ type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Song' }] })
-  songs: Song[];
+  songIds: mongoose.Schema.Types.ObjectId[];
 }
 
 export const ArtistSchema = SchemaFactory.createForClass(Artist);
